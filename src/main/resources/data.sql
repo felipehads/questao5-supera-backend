@@ -8,15 +8,15 @@ CREATE TABLE conta
 CREATE TABLE transferencia
 (
     id IDENTITY NOT NULL PRIMARY KEY,
-    data_transferencia TIMESTAMP WITH TIME ZONE NOT NULL,
+    data_transferencia TIMESTAMP NOT NULL,
     valor NUMERIC (20,2) NOT NULL,
     tipo VARCHAR(15) NOT NULL,
     nome_operador_transacao VARCHAR (50),
     conta_id INT NOT NULL,
 
-        CONSTRAINT FK_CONTA
-        FOREIGN KEY (conta_id)
-        REFERENCES conta(id_conta)
+    CONSTRAINT FK_CONTA
+    FOREIGN KEY (conta_id)
+    REFERENCES conta(id_conta)
 );
 
 INSERT INTO conta (id_conta, nome_responsavel) VALUES (1,'Fulano');
