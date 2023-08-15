@@ -1,19 +1,19 @@
 # ATUALIZAÇÃO - 14.08.2023
 # MELHORIAS A SEREM REALIZADAS NO PROJETO:
 
-[ ] Criar Docker Compose para realizar comunicação entre Backend e Frontend
-[ ] Criar um Exception Handler personalizado para a aplicação
-[ ] Refatorar camada de Filtro em camadas de Request e Response
-[ ] Mapear classes de Domínio para que a entidade não seja retornada direto nas responses
-[ ] Implementar Testes
-[ ] Documentar aplicação com Swagger
-[ ] Finalizar CRUD das entidades
-[ ] Refatorar queries JDBC -> JPA Query Methods
-[ ] Paginar resultado das consultas
-[ ] Adicionar Actuator na aplicação
-[ ] Adicionar Logger na aplicação
-[ ] Implantar dependência de monitoramente de requisições - Zipkin
-[ ] Deploy - CI/CD
+    [ ] Criar Docker Compose para realizar comunicação entre Backend e Frontend
+    [ ] Criar um Exception Handler personalizado para a aplicação
+    [ ] Refatorar camada de Filtro em camadas de Request e Response
+    [ ] Mapear classes de Domínio para que a entidade não seja retornada direto nas responses
+    [ ] Implementar Testes
+    [ ] Documentar aplicação com Swagger
+    [ ] Finalizar CRUD das entidades
+    [ ] Refatorar queries JDBC -> JPA Query Methods
+    [ ] Paginar resultado das consultas
+    [ ] Adicionar Actuator na aplicação
+    [ ] Adicionar Logger na aplicação
+    [ ] Implantar dependência de monitoramente de requisições - Zipkin
+    [ ] Deploy - CI/CD
 
 # Processo Seletivo Java
 
