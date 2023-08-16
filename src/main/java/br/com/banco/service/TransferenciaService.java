@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TransferenciaService {
-    
+
     private final TransferenciaRepository repository;
 
     // public List<TransferenciaEntity> findAll() {
@@ -24,8 +24,34 @@ public class TransferenciaService {
     //     return repository.findAllByContaIdConta(idConta);
     // }
 
-    public List<TransferenciaEntity> findAllTransferenciaByFiltro(GetTransferenciaRequest filtro) {
-        return repository.findAllByFiltro(filtro);
+    public List<TransferenciaEntity> findAllTransferenciaByFiltro(GetTransferenciaRequest request) {
+        if (request.getOperadorTransacao() != null) {
+            if (request.getDataInicio() != null && request.getDataFimLocalDateTime() != null) {
+                return repository.findAllByContaIdContaAndNomeOperadorTransacaoAndDataTransferenciaBetween(request.getIdConta(), request.getOperadorTransacao(), request.getDataInicioLocalDateTime(), request.getDataFimLocalDateTime());
+            }
+
+            if (request.getDataInicioLocalDateTime() != null) {
+                return repository.findAllByContaIdContaAndNomeOperadorTransacaoAndDataTransferenciaGreaterThan(request.getIdConta(), request.getOperadorTransacao(), request.getDataInicioLocalDateTime());
+            } else if (request.getDataFimLocalDateTime() != null) {
+                return repository.findAllByContaIdContaAndNomeOperadorTransacaoAndDataTransferenciaLessThan(request.getIdConta(), request.getOperadorTransacao(), request.getDataFimLocalDateTime());
+            }
+
+            if(request.getOperadorTransacao().isBlank()) {
+                return repository.findAllByContaIdContaAndNomeOperadorTransacao(request.getIdConta(), null);
+            }
+
+            return repository.findAllByContaIdContaAndNomeOperadorTransacao(request.getIdConta(), request.getOperadorTransacao());
+        }
+
+        if (request.getDataInicioLocalDateTime() != null && request.getDataFimLocalDateTime() != null) {
+            return repository.findAllByContaIdContaAndDataTransferenciaBetween(request.getIdConta(), request.getDataInicioLocalDateTime(), request.getDataFimLocalDateTime());
+        }
+
+        if (request.getDataInicioLocalDateTime() != null) {
+            return repository.findAllByContaIdContaAndDataTransferenciaGreaterThan(request.getIdConta(), request.getDataInicioLocalDateTime());
+        } else if (request.getDataFimLocalDateTime() != null) {
+            return repository.findAllByContaIdContaAndDataTransferenciaLessThan(request.getIdConta(), request.getDataFimLocalDateTime());
+        }
+        return repository.findAllByContaIdConta(request.getIdConta());
     }
-    
 }
