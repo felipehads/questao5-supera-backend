@@ -1,4 +1,4 @@
-package br.com.banco.database.repository;
+package br.com.banco.repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.banco.database.entity.TransferenciaEntity;
-import br.com.banco.domain.filtro.FiltroTransferencia;
+import br.com.banco.entity.TransferenciaEntity;
+import br.com.banco.domain.dto.request.GetTransferenciaRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class TransferenciaCustomRepositoryImpl implements TransferenciaCustomRep
     private final EntityManager entityManager;
 
     @Override
-    public List<TransferenciaEntity> findAllByFiltro(FiltroTransferencia filtro) {
+    public List<TransferenciaEntity> findAllByFiltro(GetTransferenciaRequest filtro) {
 
         String sql = "SELECT t FROM TransferenciaEntity t WHERE 1=1 ";
         Map<String, Object> paramMap = new HashMap<>();

@@ -13,10 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import br.com.banco.database.entity.ContaEntity;
-import br.com.banco.database.entity.TransferenciaEntity;
-import br.com.banco.database.repository.TransferenciaRepository;
-import br.com.banco.domain.filtro.FiltroTransferencia;
+import br.com.banco.entity.ContaEntity;
+import br.com.banco.entity.TransferenciaEntity;
+import br.com.banco.repository.TransferenciaRepository;
+import br.com.banco.domain.dto.request.GetTransferenciaRequest;
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
@@ -31,7 +31,7 @@ public class TransferenciaRepositoryTest {
     @Test
     public void shouldReturnAnEmptyArray() {
 
-        FiltroTransferencia filtro = new FiltroTransferencia();
+        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);
 
@@ -43,7 +43,7 @@ public class TransferenciaRepositoryTest {
     public void shouldReturnTransferenciasFilteredByIdConta1() {
 
         // idConta = 1
-        FiltroTransferencia filtro = new FiltroTransferencia();
+        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
         filtro.setIdConta(1);
 
         List<TransferenciaEntity> result1 = repository.findAllByFiltro(filtro);
@@ -133,7 +133,7 @@ public class TransferenciaRepositoryTest {
     public void shouldReturnTransferenciasFilteredByIdConta2() {
 
         // idConta = 2
-        FiltroTransferencia filtro = new FiltroTransferencia();
+        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
         filtro.setIdConta(2);
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);
@@ -223,7 +223,7 @@ public class TransferenciaRepositoryTest {
     @Test
     public void shouldReturnTransferenciasFilteredByIdConta3OrOtherNumber() {
 
-        FiltroTransferencia filtro = new FiltroTransferencia();
+        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
         filtro.setIdConta(3);
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);

@@ -1,4 +1,4 @@
-package br.com.banco.database.entity;
+package br.com.banco.entity;
 
 import java.time.LocalDateTime;
 
