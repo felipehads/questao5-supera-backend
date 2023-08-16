@@ -1,19 +1,22 @@
 package br.com.banco.domain.usecases.transferencia;
 
-import java.util.List;
-
-import br.com.banco.entity.TransferenciaEntity;
 import br.com.banco.domain.dto.request.GetTransferenciaRequest;
+import br.com.banco.domain.dto.response.TransferenciaResponse;
+import br.com.banco.entity.TransferenciaEntity;
+import br.com.banco.service.MapperService;
 import br.com.banco.service.TransferenciaService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FindAllTransferenciaByFiltro {
     
-    private TransferenciaService transferenciaService;
+    private final TransferenciaService transferenciaService;
+    private final MapperService mapperService;
 
-    public List<TransferenciaEntity> execute(GetTransferenciaRequest request) {
-        return transferenciaService.findAllTransferenciaByFiltro(request);
+    public Page<TransferenciaResponse> execute(GetTransferenciaRequest request, Integer page, Integer size) {
+        Page<TransferenciaEntity> entities = transferenciaService.findAllTransferenciaByFiltro(request, page, size);
+        return mapperService.mapPage(entities, TransferenciaResponse.class);
     }
     
 }

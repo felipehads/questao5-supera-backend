@@ -17,5 +17,5 @@ public class TransferenciaResponse {
     private Double valor;
     private String tipo;
     private String nomeOperadorTransacao;
-//    CONTA
+    private ContaResponse conta;
 }

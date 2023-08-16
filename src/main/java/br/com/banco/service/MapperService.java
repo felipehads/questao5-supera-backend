@@ -2,6 +2,8 @@ package br.com.banco.service;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +20,14 @@ public class MapperService {
                 .stream()
                 .map(source -> modelMapper.map(source, destinationClass))
                 .collect(Collectors.toList());
+    }
+
+    public <S, T> Page<T> mapPage(Page<S> sourceList, Class<T> destinationClass) {
+        List<T> mappedList = sourceList
+                .getContent()
+                .stream()
+                .map(source -> modelMapper.map(source, destinationClass))
+                .collect(Collectors.toList());
+        return new PageImpl<>(mappedList, sourceList.getPageable(), sourceList.getTotalElements());
     }
 }
