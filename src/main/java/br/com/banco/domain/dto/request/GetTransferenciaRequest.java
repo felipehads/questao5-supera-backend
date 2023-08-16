@@ -1,4 +1,4 @@
-package br.com.banco.domain.filtro;
+package br.com.banco.domain.dto.request;
 
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FiltroTransferencia {
+public class GetTransferenciaRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataInicio;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

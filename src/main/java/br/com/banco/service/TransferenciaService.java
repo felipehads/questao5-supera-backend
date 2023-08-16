@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import br.com.banco.database.repository.TransferenciaRepository;
-import br.com.banco.domain.filtro.FiltroTransferencia;
-import br.com.banco.database.entity.TransferenciaEntity;
+import br.com.banco.repository.TransferenciaRepository;
+import br.com.banco.domain.dto.request.GetTransferenciaRequest;
+import br.com.banco.entity.TransferenciaEntity;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,7 +24,7 @@ public class TransferenciaService {
     //     return repository.findAllByContaIdConta(idConta);
     // }
 
-    public List<TransferenciaEntity> findAllTransferenciaByFiltro(FiltroTransferencia filtro) {
+    public List<TransferenciaEntity> findAllTransferenciaByFiltro(GetTransferenciaRequest filtro) {
         return repository.findAllByFiltro(filtro);
     }
     

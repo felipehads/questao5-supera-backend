@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.banco.database.entity.TransferenciaEntity;
-import br.com.banco.domain.filtro.FiltroTransferencia;
+import br.com.banco.entity.TransferenciaEntity;
+import br.com.banco.domain.dto.request.GetTransferenciaRequest;
 import br.com.banco.domain.usecases.transferencia.FindAllTransferenciaByFiltro;
 import br.com.banco.service.TransferenciaService;
 
@@ -21,8 +21,8 @@ public class TransferenciaController {
     private TransferenciaService transferenciaService;
 
     @GetMapping("/filtrar")
-    public ResponseEntity<List<TransferenciaEntity>> getTransferenciasByFiltro(FiltroTransferencia filtro) {
-        List<TransferenciaEntity> transferencias = new FindAllTransferenciaByFiltro(transferenciaService).execute(filtro);
+    public ResponseEntity<List<TransferenciaEntity>> getTransferenciasByFiltro(GetTransferenciaRequest request) {
+        List<TransferenciaEntity> transferencias = new FindAllTransferenciaByFiltro(transferenciaService).execute(request);
         return ResponseEntity.ok(transferencias);
     }
     
