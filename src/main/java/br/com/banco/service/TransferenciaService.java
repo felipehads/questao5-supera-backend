@@ -1,15 +1,15 @@
 package br.com.banco.service;
 
 
-import java.util.List;
-
-import br.com.banco.domain.dto.response.TransferenciaResponse;
+import br.com.banco.domain.dto.request.CreateTransferenciaRequest;
+import br.com.banco.domain.dto.request.UpdateTransferenciaRequest;
+import br.com.banco.entity.ContaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.banco.repository.TransferenciaRepository;
-import br.com.banco.domain.dto.request.GetTransferenciaRequest;
+import br.com.banco.domain.dto.request.FindTransferenciasRequest;
 import br.com.banco.entity.TransferenciaEntity;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +27,7 @@ public class TransferenciaService {
     //     return repository.findAllByContaIdConta(idConta);
     // }
 
-    public Page<TransferenciaEntity> findAllTransferenciaByFiltro(GetTransferenciaRequest request, Integer page, Integer size) {
+    public Page<TransferenciaEntity> findAllTransferenciaByFiltro(FindTransferenciasRequest request, Integer page, Integer size) {
         if (request.getOperadorTransacao() != null) {
             if (request.getDataInicio() != null && request.getDataFimLocalDateTime() != null) {
                 return repository.findAllByContaIdContaAndNomeOperadorTransacaoAndDataTransferenciaBetween(request.getIdConta(), request.getOperadorTransacao(), request.getDataInicioLocalDateTime(), request.getDataFimLocalDateTime(), PageRequest.of(page,size));
@@ -56,5 +56,41 @@ public class TransferenciaService {
             return repository.findAllByContaIdContaAndDataTransferenciaLessThan(request.getIdConta(), request.getDataFimLocalDateTime(), PageRequest.of(page,size));
         }
         return repository.findAllByContaIdConta(request.getIdConta(), PageRequest.of(page,size));
+    }
+
+    public Page<TransferenciaEntity> findAllTransferencia(Integer page, Integer size) {
+        return repository.findAll(PageRequest.of(page, size));
+    }
+
+    public TransferenciaEntity findById(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Transferencia não encontrada"));
+    }
+
+    public TransferenciaEntity updateTransferenciaById(Integer id, UpdateTransferenciaRequest request) {
+        TransferenciaEntity entity = repository.getById(id);
+
+        if (request.getDataTransferencia() != null) entity.setDataTransferencia(request.getDataTransferencia());
+        if (request.getNomeOperadorTransacao() != null) entity.setNomeOperadorTransacao(request.getNomeOperadorTransacao());
+        if (request.getValor() != null) entity.setValor(request.getValor());
+        if (request.getTipo() != null) entity.setTipo(request.getTipo());
+
+        return repository.save(entity);
+    }
+
+    public TransferenciaEntity insertTransferencia(CreateTransferenciaRequest request, ContaEntity conta) {
+        TransferenciaEntity transferenciaEntity = TransferenciaEntity
+                .builder()
+                .dataTransferencia(request.getDataTransferencia())
+                .valor(request.getValor())
+                .tipo(request.getTipo())
+                .nomeOperadorTransacao(request.getNomeOperadorTransacao())
+                .conta(conta)
+                .build();
+        return repository.save(transferenciaEntity);
+
+    }
+
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }

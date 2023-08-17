@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import br.com.banco.entity.ContaEntity;
 import br.com.banco.entity.TransferenciaEntity;
 import br.com.banco.repository.TransferenciaRepository;
-import br.com.banco.domain.dto.request.GetTransferenciaRequest;
+import br.com.banco.domain.dto.request.FindTransferenciasRequest;
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
@@ -31,7 +31,7 @@ public class TransferenciaRepositoryTest {
     @Test
     public void shouldReturnAnEmptyArray() {
 
-        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
+        FindTransferenciasRequest filtro = new FindTransferenciasRequest();
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);
 
@@ -43,7 +43,7 @@ public class TransferenciaRepositoryTest {
     public void shouldReturnTransferenciasFilteredByIdConta1() {
 
         // idConta = 1
-        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
+        FindTransferenciasRequest filtro = new FindTransferenciasRequest();
         filtro.setIdConta(1);
 
         List<TransferenciaEntity> result1 = repository.findAllByFiltro(filtro);
@@ -133,7 +133,7 @@ public class TransferenciaRepositoryTest {
     public void shouldReturnTransferenciasFilteredByIdConta2() {
 
         // idConta = 2
-        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
+        FindTransferenciasRequest filtro = new FindTransferenciasRequest();
         filtro.setIdConta(2);
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);
@@ -223,7 +223,7 @@ public class TransferenciaRepositoryTest {
     @Test
     public void shouldReturnTransferenciasFilteredByIdConta3OrOtherNumber() {
 
-        GetTransferenciaRequest filtro = new GetTransferenciaRequest();
+        FindTransferenciasRequest filtro = new FindTransferenciasRequest();
         filtro.setIdConta(3);
 
         List<TransferenciaEntity> result = repository.findAllByFiltro(filtro);

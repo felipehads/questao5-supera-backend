@@ -1,15 +1,9 @@
 package br.com.banco.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "conta")
@@ -21,10 +15,14 @@ import lombok.Setter;
 public class ContaEntity {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_conta")
     private Integer idConta;
 
     @Column(name = "nome_responsavel", length = 50)
     private String nomeResponsavel;
+
+    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransferenciaEntity> transferencias;
 
 }

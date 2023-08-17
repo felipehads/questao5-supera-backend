@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetTransferenciaRequest {
+public class FindTransferenciasRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataInicio;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -1,20 +1,9 @@
 package br.com.banco.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "transferencia")
@@ -26,6 +15,7 @@ import lombok.Setter;
 public class TransferenciaEntity {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "data_transferencia")
@@ -40,7 +30,7 @@ public class TransferenciaEntity {
     @Column(name = "nome_operador_transacao", length = 50)
     private String nomeOperadorTransacao;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "conta_id", referencedColumnName = "id_conta")
     private ContaEntity conta;
 

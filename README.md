@@ -6,7 +6,7 @@
     [X] Mapear classes de Domínio para que a entidade não seja retornada direto nas responses
     [ ] Implementar Testes
     [ ] Documentar aplicação com Swagger
-    [ ] Finalizar CRUD das entidades
+    [X] Finalizar CRUD das entidades
     [X] Refatorar queries JDBC -> JPA Query Methods
     [X] Paginar resultado das consultas
     [ ] Adicionar Actuator na aplicação

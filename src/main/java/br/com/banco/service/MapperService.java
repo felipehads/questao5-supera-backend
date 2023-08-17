@@ -30,4 +30,8 @@ public class MapperService {
                 .collect(Collectors.toList());
         return new PageImpl<>(mappedList, sourceList.getPageable(), sourceList.getTotalElements());
     }
+
+    public <S, T> T map(S source, Class<T> destinationClass) {
+        return modelMapper.map(source, destinationClass);
+    }
 }
